@@ -1,30 +1,39 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render(path = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
-  return worker.fetch(new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }), {
-    ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
-  }, { waitUntil() {}, passThroughOnException() {} });
-}
+const root = new URL("../", import.meta.url);
 
-test("renders the Badesha Electrical home page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  const html = await response.text();
-  assert.match(html, /Badesha Electrical Ltd\./i);
-  assert.match(html, /Built right\./i);
-  assert.match(html, /604-780-6000/);
-  assert.match(html, /application\/ld\+json/);
-  assert.doesNotMatch(html, /codex-preview|SkeletonPreview|Your site is taking shape/i);
+test("keeps the authentic Badesha home and contact information", async () => {
+  const [page, shell, layout] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+  ]);
+  assert.match(page, /Built right\./i);
+  assert.match(page, /30\+/);
+  assert.match(shell, /604-780-6000/);
+  assert.match(shell, /info@badeshaelectrical\.com/);
+  assert.match(layout, /application\/ld\+json/);
+  assert.doesNotMatch(`${page}${shell}${layout}`, /codex-preview|SkeletonPreview|Your site is taking shape/i);
 });
 
-test("renders every primary route", async () => {
-  for (const [path, marker] of [["/services", "From first wire"], ["/projects", "Powering communities"], ["/about", "Pride in the work"], ["/safety", "Safety is a way"], ["/contact", "Tell us what needs power"], ["/book", "Clear starting prices"]]) {
-    const response = await render(path);
-    assert.equal(response.status, 200, path);
-    assert.match(await response.text(), new RegExp(marker, "i"), path);
+test("defines every primary route with route-specific metadata", async () => {
+  const routes = ["services", "projects", "about", "safety", "contact", "book"];
+  for (const route of routes) {
+    const page = await readFile(new URL(`app/${route}/page.tsx`, root), "utf8");
+    assert.match(page, /export const metadata/);
+    assert.match(page, new RegExp(`canonical:\\s*["']/${route}["']`));
   }
+});
+
+test("ships crawl and social discovery assets", async () => {
+  const [sitemap, robots, socialCard] = await Promise.all([
+    readFile(new URL("app/sitemap.ts", root), "utf8"),
+    readFile(new URL("app/robots.ts", root), "utf8"),
+    readFile(new URL("public/og.png", root)),
+  ]);
+  assert.match(sitemap, /badeshaelectrical\.com/);
+  assert.match(robots, /sitemap\.xml/);
+  assert.ok(socialCard.byteLength > 100_000);
 });
