@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { ContactStrip, PageIntro } from "../../components/SiteShell";
+import { pageMetadata } from "../seo";
 
-export const metadata: Metadata = { title: "Health and Safety", description: "Badesha Electrical's commitment to safe electrical work, training and open jobsite communication.", alternates: { canonical: "/safety" } };
+export const metadata = pageMetadata({ title: "Electrical Health and Safety", description: "Learn how Badesha Electrical approaches safe electrical work through training, regular safety meetings, jobsite planning and open communication.", path: "/safety" });
 
 export default function SafetyPage() {
   return <main><PageIntro eyebrow="Health & safety" title="Safety is a way of working."><p>Safe electrical work starts with training, communication and a shared responsibility to protect every person on the jobsite.</p></PageIntro>

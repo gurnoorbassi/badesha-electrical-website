@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ContactStrip } from "../components/SiteShell";
 import { primaryServices, projects } from "./content";
 
@@ -25,7 +26,7 @@ export default function Home() {
           <p className="kicker">Surrey, British Columbia</p>
           <h1>Built right.<br /><em>Powered</em> for life.</h1>
           <p className="hero-intro">Residential, commercial and industrial electrical work backed by more than 30 years of hands-on experience.</p>
-          <div className="button-row hero-actions"><a className="button dark" href="/contact">Request a quote</a><a className="button outline" href="/projects">View all projects</a></div>
+          <div className="button-row hero-actions"><Link className="button dark" href="/contact">Request a quote</Link><Link className="button outline" href="/projects">View all projects</Link></div>
           <a className="hero-phone" href="tel:+16047806000">Call 604-780-6000</a>
           <div className="hero-facts"><div><strong>30+</strong><span>Years of experience</span></div><div><strong>24/7</strong><span>Emergency response</span></div><div><strong>Full scope</strong><span>Residential to industrial</span></div></div>
         </div>
@@ -53,13 +54,13 @@ export default function Home() {
             <div><span>03</span><h3>Hospitality</h3><p>Carefully planned power, lighting and service solutions for welcoming, guest-focused spaces.</p></div>
           </article>
         </div>
-        <div className="sector-footer"><a className="button dark" href="/projects">View all projects</a><p>Explore completed and upcoming work across the Lower Mainland.</p></div>
+        <div className="sector-footer"><Link className="button dark" href="/projects">View all projects</Link><p>Explore completed and upcoming work across the Lower Mainland.</p></div>
       </section>
 
       <section className="section services-home">
         <div className="section-heading"><div><p className="kicker">Capabilities</p><h2>One team.<br />Every connection.</h2></div><p>From a failed breaker at home to the full electrical scope of a multi-family build, our work is planned carefully and delivered professionally.</p></div>
         <div className="service-list">
-          {primaryServices.map((service) => <a className="service-row" href="/services" key={service.number}><span>{service.number}</span><h3>{service.title}</h3><p>{service.summary}</p><strong className="service-action">View service</strong></a>)}
+          {primaryServices.map((service) => <Link className="service-row" href={service.href} key={service.number}><span>{service.number}</span><h3>{service.title}</h3><p>{service.summary}</p><strong className="service-action">View service</strong></Link>)}
         </div>
       </section>
 
@@ -69,9 +70,9 @@ export default function Home() {
       </section>
 
       <section className="section featured-projects">
-        <div className="section-heading compact"><div><p className="kicker">Selected work</p><h2>Built across the Lower Mainland.</h2></div><a className="text-link" href="/projects">View project portfolio</a></div>
+        <div className="section-heading compact"><div><p className="kicker">Selected work</p><h2>Built across the Lower Mainland.</h2></div><Link className="text-link" href="/projects">View project portfolio</Link></div>
         <div className="project-grid">
-          {projects.slice(0, 4).map((project, index) => <article className={`project-card project-${index + 1}`} key={project.title}><Image src={project.image} alt={`${project.title} development in ${project.location}`} width={900} height={650} sizes="(max-width: 640px) 100vw, 50vw" /><div><span>{project.status}</span><h3>{project.title}</h3><p>{project.location}</p></div></article>)}
+          {projects.slice(0, 4).map((project, index) => <Link className={`project-card project-${index + 1}`} href={`/projects/${project.slug}`} key={project.title}><Image src={project.image} alt={`${project.title} development in ${project.location}`} width={900} height={650} sizes="(max-width: 640px) 100vw, 50vw" /><div><span>{project.status}</span><h3>{project.title}</h3><p>{project.location}</p></div></Link>)}
         </div>
       </section>
 

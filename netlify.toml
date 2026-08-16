@@ -9,11 +9,85 @@
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "SAMEORIGIN"
+    X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; form-action 'self' mailto:; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
 
 [[headers]]
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book-a-service"
+  to = "/book"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about-us"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reviews"
+  to = "/about#reviews"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category/projects/*"
+  to = "/projects"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/centro"
+  to = "/projects/centro"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/verge-langley-city"
+  to = "/projects/verge"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/flora-fauna-20267-72-avenue-langley"
+  to = "/projects/flora-fauna"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/unison-14225-103-a-avenue-surrey-bc"
+  to = "/projects/unison"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/element-1-7131-17th-ave-burnaby"
+  to = "/projects/element-1"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/partap-complex-12082-90-avenue-surrey-british-columbia"
+  to = "/projects/partap-complex"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/park-maven-condo-19310-fraser-highway-surrey"
+  to = "/projects/park-maven"
+  status = 301
+  force = true
