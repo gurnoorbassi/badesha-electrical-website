@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Barlow_Condensed, Geist_Mono, Manrope } from "next/font/google";
 import { Footer, Header } from "../components/SiteShell";
 import { serviceAreas, siteUrl } from "./content";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const manrope = Manrope({ variable: "--font-body", subsets: ["latin"] });
+const barlowCondensed = Barlow_Condensed({ variable: "--font-display", subsets: ["latin"], weight: ["500", "600", "700", "800"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -66,7 +67,7 @@ const websiteSchema = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-CA" data-scroll-behavior="smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${manrope.variable} ${barlowCondensed.variable} ${geistMono.variable}`}>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <Header />
         <div id="main-content">{children}</div>
