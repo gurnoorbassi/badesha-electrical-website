@@ -19,7 +19,10 @@ export function Header() {
       <nav className="desktop-nav" aria-label="Primary navigation">
         {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
       </nav>
-      <a className="header-call" href="tel:+16047806000"><span>24/7 service</span>604-780-6000</a>
+      <div className="header-actions">
+        <a className="header-call" href="tel:+16047806000"><span>24/7 service</span>604-780-6000</a>
+        <a className="header-quote" href="/contact">Request a quote</a>
+      </div>
       <details className="mobile-menu">
         <summary>Menu</summary>
         <nav aria-label="Mobile navigation">
@@ -48,9 +51,9 @@ export function Footer() {
           <p>Residential, commercial and industrial electrical expertise across Greater Vancouver.</p>
         </div>
         <div><strong>Visit</strong><a href="/services">Services</a><a href="/projects">Projects</a><a href="/about">About</a><a href="/safety">Safety</a></div>
-        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><span>Mon–Fri, 8:00–5:00</span></div>
+        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><span>Monday to Friday, 8:00 a.m. to 5:00 p.m.</span></div>
       </div>
-      <div className="footer-bottom"><span>© {new Date().getFullYear()} Badesha Electrical Ltd.</span><span>Surrey, British Columbia</span></div>
+      <div className="footer-bottom"><span>{new Date().getFullYear()} Badesha Electrical Ltd. All rights reserved.</span><span>Surrey, British Columbia</span></div>
     </footer>
   );
 }

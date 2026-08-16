@@ -22,11 +22,11 @@ export default function Home() {
     <main>
       <section className="home-hero">
         <div className="hero-copy">
-          <p className="kicker">Surrey · Greater Vancouver</p>
+          <p className="kicker">Surrey, British Columbia</p>
           <h1>Built right.<br /><em>Powered</em> for life.</h1>
           <p className="hero-intro">Residential, commercial and industrial electrical work backed by more than 30 years of hands-on experience.</p>
-          <div className="button-row"><a className="button dark" href="/contact">Start a project</a><a className="text-link" href="tel:+16047806000">Emergency? Call 604-780-6000 <span>↗</span></a></div>
-          <div className="hero-facts"><div><strong>30+</strong><span>Years of experience</span></div><div><strong>24/7</strong><span>Emergency response</span></div><div><strong>R · C · I</strong><span>Residential to industrial</span></div></div>
+          <div className="button-row"><a className="button dark" href="/contact">Request a quote</a><a className="text-link" href="tel:+16047806000">Call 604-780-6000</a></div>
+          <div className="hero-facts"><div><strong>30+</strong><span>Years of experience</span></div><div><strong>24/7</strong><span>Emergency response</span></div><div><strong>Full scope</strong><span>Residential to industrial</span></div></div>
         </div>
         <div className="hero-visual">
           <Image src="/images/hero.png" alt="Flora and Fauna multi-family development, a Badesha Electrical project" width={768} height={458} priority sizes="(max-width: 980px) 100vw, 47vw" />
@@ -39,7 +39,7 @@ export default function Home() {
       <section className="section services-home">
         <div className="section-heading"><div><p className="kicker">Capabilities</p><h2>One team.<br />Every connection.</h2></div><p>From a failed breaker at home to the full electrical scope of a multi-family build, our work is planned carefully and delivered professionally.</p></div>
         <div className="service-list">
-          {primaryServices.map((service) => <a className="service-row" href="/services" key={service.number}><span>{service.number}</span><h3>{service.title}</h3><p>{service.summary}</p><b>↗</b></a>)}
+          {primaryServices.map((service) => <a className="service-row" href="/services" key={service.number}><span>{service.number}</span><h3>{service.title}</h3><p>{service.summary}</p><strong className="service-action">View service</strong></a>)}
         </div>
       </section>
 
@@ -49,13 +49,13 @@ export default function Home() {
       </section>
 
       <section className="section featured-projects">
-        <div className="section-heading compact"><div><p className="kicker">Selected work</p><h2>Built across the Lower Mainland.</h2></div><a className="text-link" href="/projects">View all projects <span>↗</span></a></div>
+        <div className="section-heading compact"><div><p className="kicker">Selected work</p><h2>Built across the Lower Mainland.</h2></div><a className="text-link" href="/projects">View project portfolio</a></div>
         <div className="project-grid">
           {projects.slice(0, 4).map((project, index) => <article className={`project-card project-${index + 1}`} key={project.title}><Image src={project.image} alt={`${project.title} development in ${project.location}`} width={900} height={650} sizes="(max-width: 640px) 100vw, 50vw" /><div><span>{project.status}</span><h3>{project.title}</h3><p>{project.location}</p></div></article>)}
         </div>
       </section>
 
-      <section className="review-section"><p className="quote-mark">“</p><blockquote>Great service from these guys. The best things about dealing with them were the price and quality of work.</blockquote><p>Mehakpreet Singh · Customer review</p><a href="/about#reviews">Read client feedback</a></section>
+      <section className="review-section"><p className="kicker light">Client feedback</p><blockquote>Great service from these guys. The best things about dealing with them were the price and quality of work.</blockquote><p>Mehakpreet Singh, customer review</p><a href="/about#reviews">Read client feedback</a></section>
       <ContactStrip />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     </main>
