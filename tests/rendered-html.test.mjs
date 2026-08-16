@@ -101,3 +101,12 @@ test("preserves legacy search equity and hardened delivery headers", async () =>
   assert.match(config, /Strict-Transport-Security/);
   assert.match(config, /X-Frame-Options = "DENY"/);
 });
+
+test("Next.js responses include the production security policy", async () => {
+  const config = await readFile(new URL("next.config.ts", root), "utf8");
+
+  assert.match(config, /Content-Security-Policy/);
+  assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /X-Frame-Options", value: "DENY"/);
+  assert.match(config, /Strict-Transport-Security/);
+});
