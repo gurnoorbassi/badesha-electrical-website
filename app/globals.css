@@ -21,8 +21,8 @@ button, input, textarea { font: inherit; }
 .skip-link:focus { top: 1rem; }
 
 .site-header { position: sticky; top: 0; z-index: 50; min-height: 78px; display: grid; grid-template-columns: minmax(200px, 1fr) auto minmax(250px, 1fr); align-items: center; gap: 2rem; padding: 0 4vw; background: rgba(255,255,255,.94); border-bottom: 1px solid rgba(23,32,42,.1); backdrop-filter: blur(18px); }
-.logo-link { width: 190px; }
-.logo-link img { width: 100%; height: 56px; object-fit: contain; object-position: left center; }
+.logo-link { width: 220px; }
+.logo-link img { width: 100%; height: auto; object-fit: contain; object-position: left center; }
 .desktop-nav { display: flex; align-items: center; gap: clamp(1rem,2.2vw,2.4rem); }
 .desktop-nav a { position: relative; padding: 1.75rem 0; color: #3d4750; font-size: .82rem; font-weight: 650; }
 .desktop-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 1.3rem; height: 2px; background: var(--orange); transition: right .2s ease; }
@@ -212,7 +212,7 @@ button, input, textarea { font: inherit; }
 .footer-grid > div { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
 .footer-grid p, .footer-grid span, .footer-grid a { color: #aeb6bc; font-size: .86rem; line-height: 1.55; }
 .footer-grid strong { margin-bottom: .5rem; color: white; font-size: .82rem; }
-.footer-logo { width: 220px; height: 80px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
+.footer-logo { width: min(100%, 300px); height: auto; object-fit: contain; object-position: left center; }
 .footer-bottom { display: flex; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid #3b434b; color: #7f8990; font-family: var(--font-geist-mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
 
 .breadcrumb { width: min(100%, 1540px); display: flex; flex-wrap: wrap; gap: .55rem; margin: 0 auto; padding: 1.1rem 4vw; color: var(--muted); font-family: var(--font-geist-mono); font-size: .64rem; letter-spacing: .05em; }
@@ -336,8 +336,7 @@ button, input, textarea { font: inherit; }
 
 @media (max-width: 640px) {
   .site-header { min-height: 74px; padding: 0 5vw; }
-  .logo-link { width: 175px; }
-  .logo-link img { height: 54px; }
+  .logo-link { width: 185px; }
   .header-quote { display: none; }
   .hero-copy { padding: 5rem 6vw 4rem; }
   .hero-copy::before { display: none; }

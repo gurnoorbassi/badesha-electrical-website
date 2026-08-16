@@ -29,7 +29,11 @@ export const metadata: Metadata = {
       description: "Residential, commercial and industrial electrical services across Surrey and Greater Vancouver, backed by more than 30 years of experience.",
       images: ["/og.png"],
     },
-    icons: { icon: "/favicon.svg", apple: "/images/logo.png" },
+    icons: {
+      icon: [{ url: "/images/logo-mark.png", type: "image/png", sizes: "1254x1254" }],
+      shortcut: "/images/logo-mark.png",
+      apple: [{ url: "/images/logo-mark.png", sizes: "1254x1254", type: "image/png" }],
+    },
 };
 
 export const viewport: Viewport = { themeColor: "#ed5a1f", colorScheme: "light" };

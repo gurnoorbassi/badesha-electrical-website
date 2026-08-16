@@ -14,7 +14,7 @@ export function Header() {
   return (
     <header className="site-header">
       <Link className="logo-link" href="/" aria-label="Badesha Electrical Ltd. home">
-        <Image src="/images/logo.png" alt="Badesha Electrical Ltd." width={450} height={200} priority />
+        <Image src="/images/logo.png" alt="Badesha Electrical Ltd." width={2172} height={724} priority />
       </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">
         {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
@@ -47,7 +47,7 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <Image className="footer-logo" src="/images/logo.png" alt="Badesha Electrical Ltd." width={450} height={200} />
+          <Image className="footer-logo" src="/images/logo.png" alt="Badesha Electrical Ltd." width={2172} height={724} />
           <p>Residential, commercial and industrial electrical expertise across Greater Vancouver.</p>
         </div>
         <div><strong>Visit</strong><Link href="/services">Services</Link><Link href="/projects">Projects</Link><Link href="/service-areas">Service areas</Link><Link href="/about">About</Link><Link href="/safety">Safety</Link></div>

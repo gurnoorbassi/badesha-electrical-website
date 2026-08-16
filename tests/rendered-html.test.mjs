@@ -45,6 +45,21 @@ test("ships crawl and social discovery assets", async () => {
   assert.ok(socialCard.byteLength > 100_000);
 });
 
+test("uses the new Badesha logo across site and search surfaces", async () => {
+  const [shell, layout, logo, logoMark] = await Promise.all([
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("public/images/logo.png", root)),
+    readFile(new URL("public/images/logo-mark.png", root)),
+  ]);
+  assert.match(shell, /\/images\/logo\.png/g);
+  assert.match(layout, /\/images\/logo-mark\.png/);
+  assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
+  assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
+  assert.ok(logo.byteLength > 1_000_000);
+  assert.ok(logoMark.byteLength > 100_000);
+});
+
 test("prerenders the full SEO route set with unique discovery metadata", async () => {
   const appOutput = new URL(".next/server/app/", root);
   const files = await readdir(appOutput, { recursive: true });
