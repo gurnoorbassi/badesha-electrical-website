@@ -12,6 +12,10 @@ test("keeps the authentic Badesha home and contact information", async () => {
   ]);
   assert.match(page, /Built right\./i);
   assert.match(page, /30\+/);
+  assert.match(page, /View all projects/);
+  assert.match(page, />Residential</);
+  assert.match(page, />Commercial</);
+  assert.match(page, />Hospitality</);
   assert.match(shell, /604-780-6000/);
   assert.match(shell, /info@badeshaelectrical\.com/);
   assert.match(layout, /application\/ld\+json/);
