@@ -18,6 +18,8 @@ test("keeps the authentic Badesha home and contact information", async () => {
   assert.match(page, />Hospitality</);
   assert.match(shell, /604-780-6000/);
   assert.match(shell, /info@badeshaelectrical\.com/);
+  assert.match(shell, /Web designed by/);
+  assert.match(shell, /instagram\.com\/agdigitalz/);
   assert.match(layout, /application\/ld\+json/);
   assert.doesNotMatch(`${page}${shell}${layout}`, /codex-preview|SkeletonPreview|Your site is taking shape/i);
 });
