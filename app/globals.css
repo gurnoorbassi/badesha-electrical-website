@@ -41,6 +41,8 @@ button, input, textarea { font: inherit; }
 .button:hover { transform: translateY(-2px); }
 .button.dark { color: white; background: var(--ink); }
 .button.dark:hover { background: var(--orange); }
+.button.outline { color: var(--ink); background: transparent; border-color: #aeb4b8; }
+.button.outline:hover { color: var(--orange); border-color: var(--orange); }
 .button.orange { color: white; background: var(--orange); }
 .button.orange:hover { color: var(--ink); background: var(--amber); }
 .button.ghost-light { color: white; border-color: #59616a; }
@@ -54,6 +56,9 @@ button, input, textarea { font: inherit; }
 .hero-copy h1 { max-width: 720px; margin: 0; font-size: clamp(3.4rem,6.2vw,6.25rem); font-weight: 730; line-height: .94; letter-spacing: -.062em; }
 .hero-copy h1 em { color: var(--orange); font-family: inherit; font-style: normal; font-weight: 730; }
 .hero-intro { max-width: 620px; margin: 1.7rem 0 2rem; color: #424b53; font-size: clamp(1rem,1.4vw,1.2rem); line-height: 1.62; }
+.hero-actions { gap: .75rem; }
+.hero-phone { width: fit-content; margin-top: 1rem; padding-bottom: .15rem; color: var(--muted); border-bottom: 1px solid #aeb4b8; font-size: .78rem; font-weight: 680; }
+.hero-phone:hover { color: var(--orange); border-color: var(--orange); }
 .hero-facts { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 3.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
 .hero-facts strong { display: block; font-family: var(--font-geist-mono); font-size: 1.1rem; }
 .hero-facts span { display: block; margin-top: .35rem; color: var(--muted); font-size: .74rem; }
@@ -65,6 +70,18 @@ button, input, textarea { font: inherit; }
 .hero-badge strong { font-size: 1.1rem; }
 .trust-bar { width: min(calc(100% - 8vw), 1400px); display: grid; grid-template-columns: repeat(4,1fr); margin: 0 auto; background: white; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 36px rgba(23,32,42,.06); }
 .trust-bar span { padding: 1.15rem 1rem; color: #3f4952; border-right: 1px solid var(--line); font-family: var(--font-geist-mono); font-size: .64rem; letter-spacing: .1em; text-align: center; text-transform: uppercase; }
+.trust-bar span:last-child { border-right: 0; }
+
+.sector-showcase { padding-bottom: clamp(4rem,7vw,7rem); }
+.sector-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.sector-card { overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 16px; }
+.sector-card img { width: 100%; aspect-ratio: 1.28; object-fit: cover; }
+.sector-card > div { padding: 1.65rem; }
+.sector-card span { color: var(--orange); font-family: var(--font-geist-mono); font-size: .68rem; }
+.sector-card h3 { margin: .75rem 0 .65rem; font-size: clamp(1.6rem,2.5vw,2.4rem); letter-spacing: -.04em; }
+.sector-card p { margin: 0; color: var(--muted); line-height: 1.65; }
+.sector-footer { display: flex; align-items: center; gap: 1.25rem; margin-top: 1.75rem; }
+.sector-footer p { margin: 0; color: var(--muted); font-size: .86rem; }
 
 .section { width: min(100%, 1540px); margin: 0 auto; padding: clamp(5rem,8vw,8rem) 4vw; }
 .section-heading { display: grid; grid-template-columns: 1.4fr .6fr; gap: 8vw; align-items: end; margin-bottom: 4.5rem; }
@@ -210,6 +227,8 @@ button, input, textarea { font: inherit; }
   .service-row { grid-template-columns: 50px 1fr 30px; }
   .service-row p { grid-column: 2; }
   .project-grid { grid-template-columns: 1fr 1fr; }
+  .sector-grid { grid-template-columns: 1fr 1fr; }
+  .sector-card:last-child { grid-column: 1 / -1; }
   .project-1 { grid-row: auto; min-height: 390px; }
   .page-intro { grid-template-columns: 1fr; min-height: auto; padding-top: 7rem; }
   .page-intro > .kicker { margin-bottom: 0; }
@@ -247,6 +266,11 @@ button, input, textarea { font: inherit; }
   .story-image { min-height: 420px; }
   .story-copy { padding: 5rem 6vw; }
   .project-grid { grid-template-columns: 1fr; }
+  .hero-actions { align-items: stretch; }
+  .hero-actions .button { flex: 1 1 150px; }
+  .sector-grid { grid-template-columns: 1fr; }
+  .sector-card:last-child { grid-column: auto; }
+  .sector-footer { align-items: flex-start; flex-direction: column; }
   .project-card, .project-1 { min-height: 430px; }
   .review-section { padding: 6rem 6vw; }
   .service-title { grid-template-columns: 36px 1fr; }

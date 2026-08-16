@@ -25,7 +25,8 @@ export default function Home() {
           <p className="kicker">Surrey, British Columbia</p>
           <h1>Built right.<br /><em>Powered</em> for life.</h1>
           <p className="hero-intro">Residential, commercial and industrial electrical work backed by more than 30 years of hands-on experience.</p>
-          <div className="button-row"><a className="button dark" href="/contact">Request a quote</a><a className="text-link" href="tel:+16047806000">Call 604-780-6000</a></div>
+          <div className="button-row hero-actions"><a className="button dark" href="/contact">Request a quote</a><a className="button outline" href="/projects">View all projects</a></div>
+          <a className="hero-phone" href="tel:+16047806000">Call 604-780-6000</a>
           <div className="hero-facts"><div><strong>30+</strong><span>Years of experience</span></div><div><strong>24/7</strong><span>Emergency response</span></div><div><strong>Full scope</strong><span>Residential to industrial</span></div></div>
         </div>
         <div className="hero-visual">
@@ -35,6 +36,25 @@ export default function Home() {
       </section>
 
       <section className="trust-bar" aria-label="Company strengths"><span>Licensed &amp; insured</span><span>Commercial construction</span><span>Same-day service</span><span>Generac service provider</span></section>
+
+      <section className="section sector-showcase">
+        <div className="section-heading"><div><p className="kicker">Project sectors</p><h2>Built for every environment.</h2></div><p>Thoughtful electrical delivery for homes, active commercial spaces and guest-focused properties throughout Greater Vancouver.</p></div>
+        <div className="sector-grid">
+          <article className="sector-card">
+            <Image src="/images/about.jpg" alt="Completed residential project in British Columbia" width={900} height={650} sizes="(max-width: 760px) 100vw, 33vw" />
+            <div><span>01</span><h3>Residential</h3><p>New construction, renovations, service upgrades, lighting and dependable backup power.</p></div>
+          </article>
+          <article className="sector-card">
+            <Image src="/images/partap.jpg" alt="Partap Complex commercial and industrial project in Surrey" width={900} height={650} sizes="(max-width: 760px) 100vw, 33vw" />
+            <div><span>02</span><h3>Commercial</h3><p>Complete electrical systems for workplaces, retail, industrial and multi-unit developments.</p></div>
+          </article>
+          <article className="sector-card">
+            <Image src="/images/centro.jpg" alt="Centro multi-unit development in Central City, Surrey" width={900} height={650} sizes="(max-width: 760px) 100vw, 33vw" />
+            <div><span>03</span><h3>Hospitality</h3><p>Carefully planned power, lighting and service solutions for welcoming, guest-focused spaces.</p></div>
+          </article>
+        </div>
+        <div className="sector-footer"><a className="button dark" href="/projects">View all projects</a><p>Explore completed and upcoming work across the Lower Mainland.</p></div>
+      </section>
 
       <section className="section services-home">
         <div className="section-heading"><div><p className="kicker">Capabilities</p><h2>One team.<br />Every connection.</h2></div><p>From a failed breaker at home to the full electrical scope of a multi-family build, our work is planned carefully and delivered professionally.</p></div>
