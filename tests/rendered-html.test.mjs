@@ -18,6 +18,8 @@ test("keeps the authentic Badesha home and contact information", async () => {
   assert.match(page, />Hospitality</);
   assert.match(shell, /604-780-6000/);
   assert.match(shell, /info@badeshaelectrical\.com/);
+  assert.match(shell, /Web designed by/);
+  assert.match(shell, /instagram\.com\/agdigitalz/);
   assert.match(layout, /application\/ld\+json/);
   assert.doesNotMatch(`${page}${shell}${layout}`, /codex-preview|SkeletonPreview|Your site is taking shape/i);
 });
@@ -43,6 +45,21 @@ test("ships crawl and social discovery assets", async () => {
   assert.match(sitemap, /projects/);
   assert.match(robots, /sitemap\.xml/);
   assert.ok(socialCard.byteLength > 100_000);
+});
+
+test("uses the new Badesha logo across site and search surfaces", async () => {
+  const [shell, layout, logo, logoMark] = await Promise.all([
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("public/images/logo.png", root)),
+    readFile(new URL("public/images/logo-mark.png", root)),
+  ]);
+  assert.match(shell, /\/images\/logo\.png/g);
+  assert.match(layout, /\/images\/logo-mark\.png/);
+  assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
+  assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
+  assert.ok(logo.byteLength > 1_000_000);
+  assert.ok(logoMark.byteLength > 100_000);
 });
 
 test("prerenders the full SEO route set with unique discovery metadata", async () => {
