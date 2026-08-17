@@ -240,6 +240,17 @@ test("ships a site-wide motion system with accessible reduced-motion behavior", 
   assert.match(css, /@view-transition/);
 });
 
+test("uses an optimized homepage hero video with a still-image fallback", async () => {
+  const [home, css] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
+  ]);
+  assert.match(home, /<video[^>]+autoPlay[^>]+muted[^>]+loop[^>]+playsInline/);
+  assert.match(home, /poster="\/images\/residential-modern-farmhouse\.jpg"/);
+  assert.match(home, /\/videos\/hero-electrician\.mp4/);
+  assert.match(css, /\.hero-video \{ display: none; \}/);
+});
+
 test("provides standalone project category pages with the approved residential photo library", async () => {
   const [category, residential, commercial, hospitality] = await Promise.all([
     readFile(new URL("components/ProjectCategory.tsx", root), "utf8"),
