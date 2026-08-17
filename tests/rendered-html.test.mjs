@@ -48,7 +48,7 @@ test("ships crawl and social discovery assets", async () => {
   assert.match(sitemap, /servicePages/);
   assert.match(sitemap, /projects/);
   assert.match(robots, /sitemap\.xml/);
-  assert.ok(socialCard.byteLength > 100_000);
+  assert.ok(socialCard.byteLength > 100_000 && socialCard.byteLength < 500_000);
 });
 
 test("uses the new Badesha logo across site and search surfaces", async () => {
@@ -64,22 +64,26 @@ test("uses the new Badesha logo across site and search surfaces", async () => {
   assert.match(layout, /\/images\/logo-mark\.png/);
   assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
   assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
-  assert.ok(logo.byteLength > 1_000_000);
-  assert.ok(logoMark.byteLength > 100_000);
-  assert.ok(footerLogo.byteLength > 100_000);
+  assert.ok(logo.byteLength > 50_000 && logo.byteLength < 250_000);
+  assert.ok(logoMark.byteLength > 10_000 && logoMark.byteLength < 100_000);
+  assert.ok(footerLogo.byteLength > 50_000 && footerLogo.byteLength < 250_000);
 });
 
 test("prerenders the full SEO route set with unique discovery metadata", async () => {
   const appOutput = new URL(".next/server/app/", root);
   const files = await readdir(appOutput, { recursive: true });
   const htmlFiles = files.filter((file) => file.endsWith(".html") && !file.startsWith("_")).sort();
-  assert.equal(htmlFiles.length, 32);
+  assert.equal(htmlFiles.length, 33);
 
   const titles = new Set();
   const descriptions = new Set();
   const canonicals = new Set();
   for (const file of htmlFiles) {
     const html = await readFile(new URL(file.replaceAll("\\", "/"), appOutput), "utf8");
+    if (file.replaceAll("\\", "/") === "thank-you.html") {
+      assert.match(html, /name="robots" content="noindex, nofollow"/);
+      continue;
+    }
     const title = html.match(/<title>(.*?)<\/title>/i)?.[1];
     const decodedTitle = title?.replaceAll("&amp;", "&");
     const description = html.match(/<meta name="description" content="([^"]+)"/i)?.[1];
@@ -145,6 +149,26 @@ test("shows the Surrey office map and consistent weekday hours", async () => {
   assert.match(layout, /opens: "07:00"/);
   assert.match(nextConfig, /frame-src https:\/\/www\.google\.com/);
   assert.match(netlify, /frame-src https:\/\/www\.google\.com/);
+});
+
+test("ships a transfer-ready project inquiry form", async () => {
+  const [contact, formComponent, formDefinition, shell, layout, handoff] = await Promise.all([
+    readFile(new URL("app/contact/page.tsx", root), "utf8"),
+    readFile(new URL("components/ContactForm.tsx", root), "utf8"),
+    readFile(new URL("public/forms.html", root), "utf8"),
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("README.md", root), "utf8"),
+  ]);
+  assert.match(contact, /<ContactForm \/>/);
+  assert.match(`${contact}${shell}${layout}`, /projects@badeshaelectrical\.com/);
+  assert.match(formComponent, /name="project-inquiry"/);
+  assert.match(formComponent, /data-netlify="true"/);
+  assert.match(formComponent, /data-netlify-honeypot="bot-field"/);
+  assert.match(formComponent, /new URLSearchParams/);
+  assert.match(formDefinition, /name="project-inquiry"/);
+  assert.match(formDefinition, /name="form-name" value="project-inquiry"/);
+  assert.match(handoff, /Client transfer checklist/);
 });
 
 test("uses client-approved Badesha Properties imagery for residential sections", async () => {
@@ -231,6 +255,8 @@ test("preserves legacy search equity and hardened delivery headers", async () =>
     assert.match(config, new RegExp(`from = "${legacyPath.replaceAll("/", "\\/")}"`));
   }
   assert.match(config, /Content-Security-Policy/);
+  assert.match(config, /script-src-attr 'none'/);
+  assert.match(config, /style-src 'self'; style-src-attr 'unsafe-inline'/);
   assert.match(config, /Strict-Transport-Security/);
   assert.match(config, /X-Frame-Options = "DENY"/);
 });
@@ -240,6 +266,8 @@ test("Next.js responses include the production security policy", async () => {
 
   assert.match(config, /Content-Security-Policy/);
   assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /script-src-attr 'none'/);
+  assert.match(config, /Cross-Origin-Opener-Policy/);
   assert.match(config, /X-Frame-Options", value: "DENY"/);
   assert.match(config, /Strict-Transport-Security/);
 });

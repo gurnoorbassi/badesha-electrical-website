@@ -49,6 +49,10 @@ const businessSchema = {
   image: `${siteUrl}/og.png`,
   telephone: "+1-604-780-6000",
   email: "info@badeshaelectrical.com",
+  contactPoint: [
+    { "@type": "ContactPoint", contactType: "project inquiries", email: "projects@badeshaelectrical.com", telephone: "+1-604-780-6000", areaServed: "CA-BC", availableLanguage: "English" },
+    { "@type": "ContactPoint", contactType: "customer service", email: "info@badeshaelectrical.com", telephone: "+1-604-780-6000", areaServed: "CA-BC", availableLanguage: "English" },
+  ],
   address: { "@type": "PostalAddress", streetAddress: "12777 76A Ave Unit 1A", addressLocality: "Surrey", addressRegion: "BC", postalCode: "V3W 1S9", addressCountry: "CA" },
   areaServed: serviceAreas.map((name) => ({ "@type": "City", name })),
   openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "17:00" }],

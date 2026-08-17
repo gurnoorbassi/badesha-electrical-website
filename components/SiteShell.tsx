@@ -43,7 +43,7 @@ export function Footer() {
         <h2>Let&apos;s power what&apos;s next.</h2>
         <div className="footer-actions">
           <a className="button orange" href="tel:+16047806000">Call 604-780-6000</a>
-          <a className="button ghost-light" href="mailto:info@badeshaelectrical.com">Email our team</a>
+          <a className="button ghost-light" href="mailto:projects@badeshaelectrical.com">Email our projects team</a>
         </div>
       </div>
       <div className="footer-grid">
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
         <div><strong>Visit</strong><Link href="/services">Services</Link><Link href="/projects">Projects</Link><Link href="/service-areas">Service areas</Link><Link href="/about">About</Link><Link href="/safety">Safety</Link></div>
         <div><strong>Popular services</strong><Link href="/services/residential-electrician-surrey">Residential electrical</Link><Link href="/services/commercial-electrical-services">Commercial electrical</Link><Link href="/services/emergency-electrician">24-hour emergency</Link><Link href="/services/generators-transfer-switches">Generators</Link></div>
-        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">{businessAddress}</a><span>Monday to Friday, 7:00 a.m. to 5:00 p.m.</span></div>
+        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:projects@badeshaelectrical.com">projects@badeshaelectrical.com</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">{businessAddress}</a><span>Monday to Friday, 7:00 a.m. to 5:00 p.m.</span></div>
       </div>
       <div className="footer-bottom">
         <div className="footer-credit">
