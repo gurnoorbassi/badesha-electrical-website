@@ -33,7 +33,7 @@ export default function Home() {
         <div className="hero-visual">
           <Image className="hero-poster" src="/images/residential-modern-farmhouse.jpg" alt="Modern custom home built by Badesha Properties" width={1536} height={1026} priority sizes="(max-width: 980px) 100vw, 52vw" />
           <video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/images/residential-modern-farmhouse.jpg" aria-hidden="true">
-            <source src="/videos/hero-electrician.mp4" type="video/mp4" />
+            <source src="/videos/hero-building.mp4" type="video/mp4" />
           </video>
           <div className="hero-badge"><span>Residential to industrial</span><strong>Complete electrical delivery</strong></div>
         </div>

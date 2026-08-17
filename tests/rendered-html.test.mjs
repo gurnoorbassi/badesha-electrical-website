@@ -247,7 +247,7 @@ test("uses an optimized homepage hero video with a still-image fallback", async 
   ]);
   assert.match(home, /<video[^>]+autoPlay[^>]+muted[^>]+loop[^>]+playsInline/);
   assert.match(home, /poster="\/images\/residential-modern-farmhouse\.jpg"/);
-  assert.match(home, /\/videos\/hero-electrician\.mp4/);
+  assert.match(home, /\/videos\/hero-building\.mp4/);
   assert.match(css, /\.hero-video \{ display: none; \}/);
 });
 
