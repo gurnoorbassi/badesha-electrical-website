@@ -23,6 +23,6 @@ Source site: https://badeshaproperties.ca/
 
 ## Homepage hero video
 
-- `hero-electrician.mp4` — “Electrician expertly drills into concrete wall setting up wiring” by Sergei Starostin: https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/
+- `hero-building.mp4` — “Stunning modern house exterior with lush greenery and contemporary design elements” by Hamza Awan: https://www.pexels.com/video/drone-footage-of-beautifully-designed-home-exterior-17224715/
 - Source is marked “Free to use” under the Pexels license: https://www.pexels.com/license/
 - The website copy is a silent, 1280 × 720, fast-start H.264 encode optimized from the original 4K source.
