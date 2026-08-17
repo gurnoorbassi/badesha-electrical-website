@@ -52,19 +52,21 @@ test("ships crawl and social discovery assets", async () => {
 });
 
 test("uses the new Badesha logo across site and search surfaces", async () => {
-  const [shell, layout, logo, logoMark] = await Promise.all([
+  const [shell, layout, logo, logoMark, footerLogo] = await Promise.all([
     readFile(new URL("components/SiteShell.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
     readFile(new URL("public/images/logo.png", root)),
     readFile(new URL("public/images/logo-mark.png", root)),
+    readFile(new URL("public/images/logo-footer.png", root)),
   ]);
   assert.match(shell, /\/images\/logo\.png/g);
-  assert.equal((shell.match(/\/images\/logo\.png/g) || []).length, 2);
+  assert.match(shell, /\/images\/logo-footer\.png/);
   assert.match(layout, /\/images\/logo-mark\.png/);
   assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
   assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
   assert.ok(logo.byteLength > 1_000_000);
   assert.ok(logoMark.byteLength > 100_000);
+  assert.ok(footerLogo.byteLength > 100_000);
 });
 
 test("prerenders the full SEO route set with unique discovery metadata", async () => {
@@ -121,12 +123,28 @@ test("publishes verified customer reviews and links to the Google review profile
     readFile(new URL("app/content.ts", root), "utf8"),
   ]);
   assert.match(home, /5\.0 \/ 5 from 6 reviews/);
-  assert.match(about, /Based on 6 Google reviews/);
+  assert.doesNotMatch(about, /Based on 6 Google reviews/);
   assert.match(about, /Gurbaj Gill · Google review/);
   assert.match(about, /J S Badesha · Google review/);
   assert.match(about, /Balkar Singh · Google review/);
   assert.match(content, /google\.com\/search\?q=Badesha\+Electrical\+Ltd\+Surrey\+reviews/);
   assert.match(content, /google\.com\/maps\/search/);
+});
+
+test("shows the Surrey office map and consistent weekday hours", async () => {
+  const [contact, shell, layout, nextConfig, netlify] = await Promise.all([
+    readFile(new URL("app/contact/page.tsx", root), "utf8"),
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("next.config.ts", root), "utf8"),
+    readFile(new URL("netlify.toml", root), "utf8"),
+  ]);
+  assert.match(contact, /google\.com\/maps\?q=12777/);
+  assert.match(contact, /7:00 a\.m\. to 5:00 p\.m\./);
+  assert.match(shell, /7:00 a\.m\. to 5:00 p\.m\./);
+  assert.match(layout, /opens: "07:00"/);
+  assert.match(nextConfig, /frame-src https:\/\/www\.google\.com/);
+  assert.match(netlify, /frame-src https:\/\/www\.google\.com/);
 });
 
 test("uses client-approved Badesha Properties imagery for residential sections", async () => {

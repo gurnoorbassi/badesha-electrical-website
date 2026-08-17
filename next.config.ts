@@ -6,6 +6,7 @@ const contentSecurityPolicy = [
   "connect-src 'self'",
   "font-src 'self' data:",
   "form-action 'self' mailto:",
+  "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "img-src 'self' data:",
   "object-src 'none'",
