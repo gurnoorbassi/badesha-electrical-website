@@ -1,4 +1,7 @@
 export const siteUrl = "https://badeshaelectrical.com";
+export const googleReviewsUrl = "https://www.google.com/search?q=Badesha+Electrical+Ltd+Surrey+reviews#lrd=0x5485d90acc9ec7bb:0xeb0880a3f30b1486,1,,,";
+export const googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=Badesha%20Electrical%20Ltd%2C%2012777%2076A%20Ave%20Unit%201A%2C%20Surrey%2C%20BC%20V3W%201S9";
+export const businessAddress = "12777 76A Ave Unit 1A, Surrey, BC V3W 1S9";
 
 export const serviceAreas = ["Surrey", "Langley", "Burnaby", "Maple Ridge", "Delta", "Richmond", "Vancouver", "New Westminster", "Coquitlam", "Port Coquitlam", "Port Moody", "North Vancouver", "West Vancouver", "Abbotsford", "Chilliwack", "Mission", "Hope"] as const;
 

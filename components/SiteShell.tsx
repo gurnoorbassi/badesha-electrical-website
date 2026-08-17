@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { businessAddress, googleMapsUrl } from "../app/content";
 
 const nav = [
   { label: "Services", href: "/services", children: [["Residential", "/services#residential"], ["Commercial", "/services#commercial"], ["Industrial", "/services#commercial"], ["24-hour emergency", "/services#emergency"]] },
@@ -47,12 +48,12 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <Link className="footer-brand" href="/" aria-label="Badesha Electrical Ltd. home"><Image src="/images/logo-mark.png" alt="" width={512} height={512} /><span><strong>Badesha</strong><small>Electrical Ltd.</small></span></Link>
+          <Link className="footer-brand" href="/" aria-label="Badesha Electrical Ltd. home"><Image className="footer-logo" src="/images/logo.png" alt="Badesha Electrical Ltd." width={2172} height={724} /></Link>
           <p>Residential, commercial and industrial electrical expertise across Greater Vancouver.</p>
         </div>
         <div><strong>Visit</strong><Link href="/services">Services</Link><Link href="/projects">Projects</Link><Link href="/service-areas">Service areas</Link><Link href="/about">About</Link><Link href="/safety">Safety</Link></div>
         <div><strong>Popular services</strong><Link href="/services/residential-electrician-surrey">Residential electrical</Link><Link href="/services/commercial-electrical-services">Commercial electrical</Link><Link href="/services/emergency-electrician">24-hour emergency</Link><Link href="/services/generators-transfer-switches">Generators</Link></div>
-        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><span>Monday to Friday, 8:00 a.m. to 5:00 p.m.</span></div>
+        <div><strong>Contact</strong><a href="tel:+16047806000">604-780-6000</a><a href="mailto:info@badeshaelectrical.com">info@badeshaelectrical.com</a><a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">{businessAddress}</a><span>Monday to Friday, 8:00 a.m. to 5:00 p.m.</span></div>
       </div>
       <div className="footer-bottom">
         <div className="footer-credit">

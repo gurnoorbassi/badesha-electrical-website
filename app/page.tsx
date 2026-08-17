@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactStrip } from "../components/SiteShell";
-import { primaryServices, projects } from "./content";
+import { googleReviewsUrl, primaryServices, projects } from "./content";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="review-section"><p className="kicker light">Client feedback</p><blockquote>Great service from these guys. The best things about dealing with them were the price and quality of work.</blockquote><p>Mehakpreet Singh, customer review</p><a href="/about#reviews">Read client feedback</a></section>
+      <section className="review-section"><p className="kicker light">Google reviews · 5.0 / 5 from 6 reviews</p><blockquote>Best rates, best service, friendly staff.</blockquote><p>J S Badesha · Google review</p><a href={googleReviewsUrl} target="_blank" rel="noopener noreferrer">Read reviews on Google</a></section>
       <ContactStrip />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     </main>

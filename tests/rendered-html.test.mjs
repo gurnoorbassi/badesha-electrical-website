@@ -5,10 +5,11 @@ import test from "node:test";
 const root = new URL("../", import.meta.url);
 
 test("keeps the authentic Badesha home and contact information", async () => {
-  const [page, shell, layout] = await Promise.all([
+  const [page, shell, layout, content] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
     readFile(new URL("components/SiteShell.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("app/content.ts", root), "utf8"),
   ]);
   assert.match(page, /Built right\./i);
   assert.match(page, /30\+/);
@@ -20,6 +21,9 @@ test("keeps the authentic Badesha home and contact information", async () => {
   assert.match(shell, /info@badeshaelectrical\.com/);
   assert.match(shell, /Web designed by/);
   assert.match(shell, /instagram\.com\/agdigitalz/);
+  assert.match(content, /12777 76A Ave Unit 1A/);
+  assert.match(layout, /streetAddress: "12777 76A Ave Unit 1A"/);
+  assert.match(layout, /postalCode: "V3W 1S9"/);
   assert.match(layout, /application\/ld\+json/);
   assert.doesNotMatch(`${page}${shell}${layout}`, /codex-preview|SkeletonPreview|Your site is taking shape/i);
 });
@@ -55,6 +59,7 @@ test("uses the new Badesha logo across site and search surfaces", async () => {
     readFile(new URL("public/images/logo-mark.png", root)),
   ]);
   assert.match(shell, /\/images\/logo\.png/g);
+  assert.equal((shell.match(/\/images\/logo\.png/g) || []).length, 2);
   assert.match(layout, /\/images\/logo-mark\.png/);
   assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
   assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
@@ -107,6 +112,21 @@ test("uses record-specific social images on representative detail routes", async
   assert.doesNotMatch(service, /property="og:image" content="[^"]*\/og\.png"/);
   assert.doesNotMatch(project, /property="og:image" content="[^"]*\/og\.png"/);
   assert.doesNotMatch(location, /property="og:image"/);
+});
+
+test("publishes verified customer reviews and links to the Google review profile", async () => {
+  const [home, about, content] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/about/page.tsx", root), "utf8"),
+    readFile(new URL("app/content.ts", root), "utf8"),
+  ]);
+  assert.match(home, /5\.0 \/ 5 from 6 reviews/);
+  assert.match(about, /Based on 6 Google reviews/);
+  assert.match(about, /Gurbaj Gill · Google review/);
+  assert.match(about, /J S Badesha · Google review/);
+  assert.match(about, /Balkar Singh · Google review/);
+  assert.match(content, /google\.com\/search\?q=Badesha\+Electrical\+Ltd\+Surrey\+reviews/);
+  assert.match(content, /google\.com\/maps\/search/);
 });
 
 test("uses client-approved Badesha Properties imagery for residential sections", async () => {
