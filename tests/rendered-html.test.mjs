@@ -161,22 +161,24 @@ test("shows the Surrey office map and consistent weekday hours", async () => {
 });
 
 test("ships a transfer-ready project inquiry form", async () => {
-  const [contact, formComponent, formDefinition, shell, layout, handoff] = await Promise.all([
+  const [contact, formComponent, shell, layout, handoff, nextConfig, netlify] = await Promise.all([
     readFile(new URL("app/contact/page.tsx", root), "utf8"),
     readFile(new URL("components/ContactForm.tsx", root), "utf8"),
-    readFile(new URL("public/forms.html", root), "utf8"),
     readFile(new URL("components/SiteShell.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
     readFile(new URL("README.md", root), "utf8"),
+    readFile(new URL("next.config.ts", root), "utf8"),
+    readFile(new URL("netlify.toml", root), "utf8"),
   ]);
   assert.match(contact, /<ContactForm \/>/);
   assert.match(`${contact}${shell}${layout}`, /projects@badeshaelectrical\.com/);
   assert.match(formComponent, /name="project-inquiry"/);
-  assert.match(formComponent, /data-netlify="true"/);
-  assert.match(formComponent, /data-netlify-honeypot="bot-field"/);
-  assert.match(formComponent, /new URLSearchParams/);
-  assert.match(formDefinition, /name="project-inquiry"/);
-  assert.match(formDefinition, /name="form-name" value="project-inquiry"/);
+  assert.match(formComponent, /https:\/\/formsubmit\.co\/ajax\/projects@badeshaelectrical\.com/);
+  assert.match(formComponent, /https:\/\/formsubmit\.co\/projects@badeshaelectrical\.com/);
+  assert.doesNotMatch(formComponent, /data-netlify/);
+  assert.match(formComponent, /name="_honey"/);
+  assert.match(nextConfig, /connect-src 'self' https:\/\/formsubmit\.co/);
+  assert.match(netlify, /form-action 'self' https:\/\/formsubmit\.co mailto:/);
   assert.match(handoff, /Client transfer checklist/);
 });
 

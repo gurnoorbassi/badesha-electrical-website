@@ -35,17 +35,17 @@ git diff --check
 
 ## Contact form
 
-The project inquiry form uses Netlify Forms. No separate database or form server is required.
+The project inquiry form uses FormSubmit for direct inbox delivery. No separate database or paid form server is required.
 
 - Form name: `project-inquiry`
 - Visible form: `/contact`
-- Static Netlify form definition: `/public/forms.html`
+- Delivery endpoint: `https://formsubmit.co/projects@badeshaelectrical.com`
 - Success fallback: `/thank-you`
 - Spam protection: honeypot field
-- Submission storage: Netlify project dashboard under **Forms**
-- Notification recipient: `projects@badeshaelectrical.com`
+- Inbox recipient: `projects@badeshaelectrical.com`
+- Activation: the recipient must click FormSubmit's confirmation link after the first submission
 
-Do not remove `public/forms.html`; Netlify's Next.js runtime uses it to discover the form during deployment.
+The form intentionally does not use Netlify Forms, so new inquiries are not posted to the Netlify Forms endpoint.
 
 ## Analytics
 

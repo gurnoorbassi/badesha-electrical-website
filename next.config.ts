@@ -3,9 +3,9 @@ import type { NextConfig } from "next";
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://formsubmit.co",
   "font-src 'self' data:",
-  "form-action 'self' mailto:",
+  "form-action 'self' https://formsubmit.co mailto:",
   "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "img-src 'self' data:",

@@ -2,9 +2,8 @@
 
 import { FormEvent, useState } from "react";
 
-const encode = (formData: FormData) => new URLSearchParams(
-  Array.from(formData.entries()).map(([key, value]) => [key, String(value)]),
-).toString();
+const formEndpoint = "https://formsubmit.co/projects@badeshaelectrical.com";
+const ajaxFormEndpoint = "https://formsubmit.co/ajax/projects@badeshaelectrical.com";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -13,13 +12,14 @@ export function ContactForm() {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+    formData.set("_replyto", String(formData.get("email") ?? ""));
     setStatus("sending");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch(ajaxFormEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode(formData),
+        headers: { Accept: "application/json" },
+        body: formData,
       });
 
       if (!response.ok) throw new Error("Submission failed");
@@ -42,15 +42,16 @@ export function ContactForm() {
         className="inquiry-form"
         name="project-inquiry"
         method="POST"
-        action="/thank-you"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
+        action={formEndpoint}
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="project-inquiry" />
-        <input type="hidden" name="subject" value="New Badesha Electrical website inquiry" data-remove-prefix />
+        <input type="hidden" name="_subject" value="New Badesha Electrical website inquiry" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://badesha-electrical.netlify.app/thank-you" />
+        <input type="hidden" name="_url" value="https://badesha-electrical.netlify.app/contact" />
         <p className="form-honeypot" aria-hidden="true">
-          <label>Do not fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
+          <label>Do not fill this out: <input name="_honey" tabIndex={-1} autoComplete="off" /></label>
         </p>
         <div className="form-grid">
           <label>Full name<input name="name" type="text" autoComplete="name" required /></label>
