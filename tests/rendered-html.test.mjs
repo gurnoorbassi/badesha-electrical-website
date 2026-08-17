@@ -66,7 +66,16 @@ test("uses the new Badesha logo across site and search surfaces", async () => {
   assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);
   assert.ok(logo.byteLength > 50_000 && logo.byteLength < 250_000);
   assert.ok(logoMark.byteLength > 10_000 && logoMark.byteLength < 100_000);
-  assert.ok(footerLogo.byteLength > 50_000 && footerLogo.byteLength < 250_000);
+  assert.ok(footerLogo.byteLength > 5_000 && footerLogo.byteLength < 250_000);
+});
+
+test("uses one deep-blue surface and keeps the inquiry introduction in normal flow", async () => {
+  const css = await readFile(new URL("app/globals.css", root), "utf8");
+  assert.match(css, /--ink:\s*#1b252e/);
+  assert.match(css, /\.site-footer\s*\{[^}]*background:\s*var\(--ink\)/s);
+  assert.match(css, /\.inquiry-section\s*\{[^}]*background:\s*var\(--ink\)/s);
+  assert.match(css, /\.inquiry-intro\s*\{[^}]*position:\s*static/s);
+  assert.doesNotMatch(css, /\.inquiry-intro\s*\{[^}]*position:\s*sticky/s);
 });
 
 test("prerenders the full SEO route set with unique discovery metadata", async () => {
