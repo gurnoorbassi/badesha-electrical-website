@@ -123,6 +123,24 @@ test("uses client-approved Badesha Properties imagery for residential sections",
   assert.match(content, /residential-fairfield-infill\.jpg/);
 });
 
+test("organizes services and projects into client-requested navigation tabs", async () => {
+  const [shell, services, projects, residential] = await Promise.all([
+    readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("app/services/page.tsx", root), "utf8"),
+    readFile(new URL("app/projects/page.tsx", root), "utf8"),
+    readFile(new URL("app/services/[slug]/page.tsx", root), "utf8"),
+  ]);
+  assert.match(shell, /Upcoming projects/);
+  assert.match(shell, /Residential & multi-family/);
+  assert.match(services, /id="residential"/);
+  assert.match(services, /id="commercial"/);
+  assert.match(services, /id="emergency"/);
+  assert.match(projects, /id="upcoming"/);
+  assert.match(projects, /id="completed"/);
+  assert.match(residential, /residentialGallery/);
+  assert.doesNotMatch(residential, /duplex/i);
+});
+
 test("project detail pages include researched profiles and useful facts", async () => {
   const [content, page] = await Promise.all([
     readFile(new URL("app/content.ts", root), "utf8"),

@@ -6,6 +6,10 @@ import { ContactStrip } from "../../../components/SiteShell";
 import { serviceAreas, servicePages, siteUrl } from "../../content";
 import { pageMetadata } from "../../seo";
 
+const residentialGallery = [
+  ["/images/residential-alberg-lane.jpg", "Alberg Lane residence"], ["/images/residential-fairfield-east.jpg", "Fairfield East residence"], ["/images/residential-linwood.jpg", "Linwood townhomes"], ["/images/residential-mcdonald-residences.jpg", "McDonald Park residences"], ["/images/residential-mt-douglas.jpg", "Mt. Douglas residence"], ["/images/residential-south-oak-bay.jpg", "South Oak Bay residence"],
+] as const;
+
 type PageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
@@ -61,6 +65,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       <div className="detail-hero-image"><Image src={service.image} alt={`${service.shortTitle} project by Badesha Electrical`} fill priority sizes="(max-width: 980px) 100vw, 48vw" /></div>
     </section>
     <section className="detail-proof" aria-label="Service strengths">{service.reasons.map((reason, index) => <div key={reason}><span>{String(index + 1).padStart(2, "0")}</span><strong>{reason}</strong></div>)}</section>
+    {service.slug === "residential-electrician-surrey" ? <section className="residential-gallery section"><div className="section-heading compact"><div><p className="kicker">Residential environments</p><h2>Designed around daily life.</h2></div><p>A selection of custom homes, townhomes and residential communities from the Badesha Properties portfolio.</p></div><div className="residential-gallery-grid">{residentialGallery.map(([src, label], index) => <figure key={src} className={index === 0 || index === 5 ? "gallery-wide" : ""}><Image src={src} alt={`${label} from the Badesha Properties portfolio`} width={1200} height={800} sizes="(max-width: 700px) 100vw, 33vw" /><figcaption>{label}</figcaption></figure>)}</div></section> : null}
     <section className="section detail-services"><div className="section-heading"><div><p className="kicker">What we handle</p><h2>Practical electrical work, clearly scoped.</h2></div><p>Tell us what is changing, what is not working or what the new space needs. We will help define the electrical work and the next step.</p></div><div className="detail-service-grid">{service.services.map((item, index) => <article key={item}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item}</h3></article>)}</div></section>
     <section className="faq-section"><div><p className="kicker light">Straight answers</p><h2>Common questions.</h2></div><div>{service.faqs.map(([question, answer]) => <article key={question}><h3>{question}</h3><p>{answer}</p></article>)}</div></section>
     <section className="section related-services"><div className="section-heading compact"><div><p className="kicker">Related expertise</p><h2>More from the same team.</h2></div><Link className="text-link" href="/services">All electrical services</Link></div><div className="related-grid">{related.map((item) => <Link href={`/services/${item.slug}`} key={item.slug}><span>{item.eyebrow}</span><h3>{item.shortTitle}</h3><p>{item.description}</p><strong>View service</strong></Link>)}</div></section>

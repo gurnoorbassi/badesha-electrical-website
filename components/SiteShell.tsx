@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const nav = [
-  ["Services", "/services"],
-  ["Projects", "/projects"],
-  ["About", "/about"],
-  ["Safety", "/safety"],
-  ["Contact", "/contact"],
+  { label: "Services", href: "/services", children: [["Residential", "/services#residential"], ["Commercial", "/services#commercial"], ["Industrial", "/services#commercial"], ["24-hour emergency", "/services#emergency"]] },
+  { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects#residential"], ["Commercial & industrial", "/projects#commercial"]] },
+  { label: "About", href: "/about" },
+  { label: "Safety", href: "/safety" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -17,7 +17,7 @@ export function Header() {
         <Image src="/images/logo.png" alt="Badesha Electrical Ltd." width={2172} height={724} priority />
       </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">
-        {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        {nav.map((item) => item.children ? <div className="nav-group" key={item.href}><Link className="nav-group-link" href={item.href}>{item.label}<span aria-hidden="true">+</span></Link><div className="nav-dropdown">{item.children.map(([label, href]) => <Link href={href} key={`${label}-${href}`}>{label}</Link>)}</div></div> : <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
       <div className="header-actions">
         <a className="header-call" href="tel:+16047806000"><span>24/7 service</span>604-780-6000</a>
@@ -26,7 +26,7 @@ export function Header() {
       <details className="mobile-menu">
         <summary>Menu</summary>
         <nav aria-label="Mobile navigation">
-          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+          {nav.map((item) => item.children ? <details className="mobile-submenu" key={item.href}><summary>{item.label}</summary>{item.children.map(([label, href]) => <Link href={href} key={`${label}-${href}`}>{label}</Link>)}</details> : <Link key={item.href} href={item.href}>{item.label}</Link>)}
           <a href="/book">Book a service</a>
         </nav>
       </details>
