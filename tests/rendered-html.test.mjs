@@ -225,6 +225,32 @@ test("organizes services and projects into client-requested navigation tabs", as
   assert.doesNotMatch(residential, /duplex/i);
 });
 
+test("ships a site-wide motion system with accessible reduced-motion behavior", async () => {
+  const [layout, motion, css] = await Promise.all([
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("components/MotionEnhancements.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
+  ]);
+  assert.match(layout, /<MotionEnhancements \/>/);
+  assert.match(motion, /IntersectionObserver/);
+  assert.match(motion, /prefers-reduced-motion: reduce/);
+  assert.match(motion, /motion-scroll-progress/);
+  assert.match(css, /\.motion-reveal\.motion-visible/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /@view-transition/);
+});
+
+test("uses an optimized homepage hero video with a still-image fallback", async () => {
+  const [home, css] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
+  ]);
+  assert.match(home, /<video[^>]+autoPlay[^>]+muted[^>]+loop[^>]+playsInline/);
+  assert.match(home, /poster="\/images\/residential-modern-farmhouse\.jpg"/);
+  assert.match(home, /\/videos\/hero-electrician\.mp4/);
+  assert.match(css, /\.hero-video \{ display: none; \}/);
+});
+
 test("provides standalone project category pages with the approved residential photo library", async () => {
   const [category, residential, commercial, hospitality] = await Promise.all([
     readFile(new URL("components/ProjectCategory.tsx", root), "utf8"),
