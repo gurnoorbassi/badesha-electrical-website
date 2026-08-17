@@ -187,7 +187,7 @@ button, input, textarea { font: inherit; }
 .portfolio-heading h2 { margin: 0; font-size: clamp(2.8rem,4vw,4.2rem); line-height: .92; text-transform: uppercase; }
 .portfolio-heading > span { color: var(--orange); font-family: var(--font-geist-mono); font-size: .68rem; text-transform: uppercase; }
 .portfolio-section .project-index { padding-bottom: 4rem; }
-.portfolio-categories { display: grid; grid-template-columns: 1fr 1fr; color: white; background: var(--ink); }
+.portfolio-categories { display: grid; grid-template-columns: repeat(3,1fr); color: white; background: var(--ink); }
 .portfolio-categories article { min-height: 330px; display: flex; flex-direction: column; padding: 3rem 6vw; border-right: 1px solid #3d4851; scroll-margin-top: 140px; }
 .portfolio-categories span { color: #ffb15c; font-family: var(--font-geist-mono); font-size: .7rem; }
 .portfolio-categories p { margin: 4rem 0 .8rem; font-size: clamp(2rem,3.2vw,3.5rem); font-weight: 700; line-height: .92; text-transform: uppercase; }

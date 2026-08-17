@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const nav = [
   { label: "Services", href: "/services", children: [["Residential", "/services#residential"], ["Commercial", "/services#commercial"], ["Industrial", "/services#commercial"], ["24-hour emergency", "/services#emergency"]] },
-  { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects#residential"], ["Commercial & industrial", "/projects#commercial"]] },
+  { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects#residential"], ["Commercial & industrial", "/projects#commercial"], ["Hospitality", "/projects#hospitality"]] },
   { label: "About", href: "/about" },
   { label: "Safety", href: "/safety" },
   { label: "Contact", href: "/contact" },

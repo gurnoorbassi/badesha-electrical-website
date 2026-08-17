@@ -194,6 +194,15 @@ export const projects = [
     sourceUrl: "https://parkandmaven.com/masterplan/", sourceLabel: "Park & Maven master plan",
   },
   {
+    slug: "four-points-victoria-gateway", legacySlugs: [], title: "Four Points by Sheraton Victoria Gateway", location: "Langford, Greater Victoria", status: "Completed", type: "Hospitality", image: "/images/four-points-victoria.jpg",
+    detail: "A completed 117-room hospitality property serving Greater Victoria from its Langford location.",
+    overview: ["Four Points by Sheraton Victoria Gateway is a full-service hotel at 829 McCallum Road in Langford. The property combines guest accommodation with dining, wellness and event facilities.", "The four-storey hotel includes 117 guest rooms and more than 5,800 square feet of meeting space. Its location near major West Shore routes provides convenient access to Victoria and surrounding communities."],
+    facts: [["Brand", "Four Points by Sheraton"], ["Guest rooms", "117 rooms"], ["Use", "Hotel + event space"], ["Address", "829 McCallum Road"]],
+    highlights: ["Full-service hospitality property", "Meeting and event facilities", "West Shore location in Langford"],
+    update: "Completed hospitality project",
+    sourceUrl: "https://www.marriott.com/en-us/hotels/yyjfp-four-points-victoria-gateway/overview/", sourceLabel: "Official Marriott hotel profile",
+  },
+  {
     slug: "flora-fauna", legacySlugs: ["flora-fauna-20267-72-avenue-langley"], title: "Flora & Fauna", location: "Langley", status: "Completed", type: "Condominium community", image: "/images/hero.png",
     detail: "A completed 132-home condominium community between Langley's Willoughby and Willowbrook neighbourhoods.",
     overview: ["Flora & Fauna is formed by two four-storey buildings on 72B Avenue. Its one- to three-bedroom homes are organized around landscaped outdoor space and resident amenities.", "Developed by Tangerine Developments and Sagebrooke Properties, the community was designed to balance access to Langley's urban conveniences with shared green space."],

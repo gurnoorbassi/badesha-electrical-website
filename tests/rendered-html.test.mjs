@@ -66,7 +66,7 @@ test("prerenders the full SEO route set with unique discovery metadata", async (
   const appOutput = new URL(".next/server/app/", root);
   const files = await readdir(appOutput, { recursive: true });
   const htmlFiles = files.filter((file) => file.endsWith(".html") && !file.startsWith("_")).sort();
-  assert.equal(htmlFiles.length, 28);
+  assert.equal(htmlFiles.length, 29);
 
   const titles = new Set();
   const descriptions = new Set();
@@ -132,11 +132,13 @@ test("organizes services and projects into client-requested navigation tabs", as
   ]);
   assert.match(shell, /Upcoming projects/);
   assert.match(shell, /Residential & multi-family/);
+  assert.match(shell, /Hospitality/);
   assert.match(services, /id="residential"/);
   assert.match(services, /id="commercial"/);
   assert.match(services, /id="emergency"/);
   assert.match(projects, /id="upcoming"/);
   assert.match(projects, /id="completed"/);
+  assert.match(projects, /id="hospitality"/);
   assert.match(residential, /residentialGallery/);
   assert.doesNotMatch(residential, /duplex/i);
 });
@@ -146,7 +148,7 @@ test("project detail pages include researched profiles and useful facts", async 
     readFile(new URL("app/content.ts", root), "utf8"),
     readFile(new URL("app/projects/[slug]/page.tsx", root), "utf8"),
   ]);
-  for (const project of ["chronicle", "centro", "nova", "rockridge-living", "park-maven", "flora-fauna", "element-1", "partap-complex", "unison", "verge"]) {
+  for (const project of ["chronicle", "centro", "nova", "rockridge-living", "park-maven", "four-points-victoria-gateway", "flora-fauna", "element-1", "partap-complex", "unison", "verge"]) {
     assert.match(content, new RegExp(`slug: "${project}"`));
   }
   assert.match(content, /372 total/);
@@ -156,6 +158,15 @@ test("project detail pages include researched profiles and useful facts", async 
   assert.match(page, /Latest public update/);
   assert.match(page, /project\.facts\.map/);
   assert.match(page, /project\.highlights\.map/);
+});
+
+test("includes the client-confirmed Four Points hospitality project", async () => {
+  const content = await readFile(new URL("app/content.ts", root), "utf8");
+  const hotelImage = await readFile(new URL("public/images/four-points-victoria.jpg", root));
+  assert.match(content, /Four Points by Sheraton Victoria Gateway/);
+  assert.match(content, /117-room hospitality property/);
+  assert.match(content, /829 McCallum Road/);
+  assert.ok(hotelImage.byteLength > 100_000);
 });
 
 test("preserves legacy search equity and hardened delivery headers", async () => {

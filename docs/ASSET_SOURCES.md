@@ -16,3 +16,7 @@ The client requested that residential imagery be sourced from the affiliated Bad
 Duplex-project imagery is intentionally excluded at the client's request.
 
 Source site: https://badeshaproperties.ca/
+
+## Hospitality project imagery
+
+- `four-points-victoria.jpg` — official Marriott image from https://www.marriott.com/en-us/hotels/yyjfp-four-points-victoria-gateway/photos/
