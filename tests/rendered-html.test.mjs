@@ -197,8 +197,10 @@ test("uses client-approved Badesha Properties imagery for residential sections",
 });
 
 test("organizes services and projects into client-requested navigation tabs", async () => {
-  const [shell, services, projects, residential] = await Promise.all([
+  const [shell, mobileMenu, css, services, projects, residential] = await Promise.all([
     readFile(new URL("components/SiteShell.tsx", root), "utf8"),
+    readFile(new URL("components/MobileMenu.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
     readFile(new URL("app/services/page.tsx", root), "utf8"),
     readFile(new URL("app/projects/page.tsx", root), "utf8"),
     readFile(new URL("app/services/[slug]/page.tsx", root), "utf8"),
@@ -206,6 +208,11 @@ test("organizes services and projects into client-requested navigation tabs", as
   assert.match(shell, /Upcoming projects/);
   assert.match(shell, /Residential & multi-family/);
   assert.match(shell, /Hospitality/);
+  assert.match(shell, /<MobileMenu items=\{nav\} \/>/);
+  assert.match(mobileMenu, /View all \{item\.label\.toLowerCase\(\)\}/);
+  assert.match(mobileMenu, /onClick=\{closeMenu\}/);
+  assert.match(css, /\.mobile-menu nav\s*\{[^}]*position:\s*fixed[^}]*overflow-y:\s*auto/s);
+  assert.match(css, /body:has\(\.mobile-menu\[open\]\)\s*\{\s*overflow:\s*hidden/);
   assert.match(services, /id="residential"/);
   assert.match(services, /id="commercial"/);
   assert.match(services, /id="emergency"/);

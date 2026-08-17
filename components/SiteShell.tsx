@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { businessAddress, googleMapsUrl } from "../app/content";
+import { MobileMenu, type NavigationItem } from "./MobileMenu";
 
-const nav = [
+const nav: readonly NavigationItem[] = [
   { label: "Services", href: "/services", children: [["Residential", "/services#residential"], ["Commercial", "/services#commercial"], ["Industrial", "/services#commercial"], ["24-hour emergency", "/services#emergency"]] },
   { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects/residential-multi-family"], ["Commercial & industrial", "/projects/commercial-industrial"], ["Hospitality", "/projects/hospitality"]] },
   { label: "About", href: "/about" },
@@ -24,13 +25,7 @@ export function Header() {
         <a className="header-call" href="tel:+16047806000"><span>24/7 service</span>604-780-6000</a>
         <a className="header-quote" href="/contact">Request a quote</a>
       </div>
-      <details className="mobile-menu">
-        <summary>Menu</summary>
-        <nav aria-label="Mobile navigation">
-          {nav.map((item) => item.children ? <details className="mobile-submenu" key={item.href}><summary>{item.label}</summary>{item.children.map(([label, href]) => <Link href={href} key={`${label}-${href}`}>{label}</Link>)}</details> : <Link key={item.href} href={item.href}>{item.label}</Link>)}
-          <a href="/book">Book a service</a>
-        </nav>
-      </details>
+      <MobileMenu items={nav} />
     </header>
   );
 }
