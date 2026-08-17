@@ -57,10 +57,10 @@ test("uses the new Badesha logo across site and search surfaces", async () => {
     readFile(new URL("app/layout.tsx", root), "utf8"),
     readFile(new URL("public/images/logo.png", root)),
     readFile(new URL("public/images/logo-mark.png", root)),
-    readFile(new URL("public/images/logo-footer.png", root)),
+    readFile(new URL("public/images/logo-footer-blue.png", root)),
   ]);
   assert.match(shell, /\/images\/logo\.png/g);
-  assert.match(shell, /\/images\/logo-footer\.png/);
+  assert.match(shell, /\/images\/logo-footer-blue\.png/);
   assert.match(layout, /\/images\/logo-mark\.png/);
   assert.match(layout, /logo:\s*`\$\{siteUrl\}\/images\/logo\.png`/);
   assert.doesNotMatch(layout, /icon:\s*["']\/favicon\.svg/);

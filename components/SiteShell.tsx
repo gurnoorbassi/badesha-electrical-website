@@ -48,7 +48,7 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <Link className="footer-brand" href="/" aria-label="Badesha Electrical Ltd. home"><Image className="footer-logo" src="/images/logo-footer.png" alt="Badesha Electrical Ltd." width={2172} height={724} /></Link>
+          <Link className="footer-brand" href="/" aria-label="Badesha Electrical Ltd. home"><Image className="footer-logo" src="/images/logo-footer-blue.png" alt="Badesha Electrical Ltd." width={1200} height={400} /></Link>
           <p>Residential, commercial and industrial electrical expertise across Greater Vancouver.</p>
         </div>
         <div><strong>Visit</strong><Link href="/services">Services</Link><Link href="/projects">Projects</Link><Link href="/service-areas">Service areas</Link><Link href="/about">About</Link><Link href="/safety">Safety</Link></div>
