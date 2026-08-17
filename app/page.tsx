@@ -23,7 +23,7 @@ export default function Home() {
     <main>
       <section className="home-hero">
         <div className="hero-copy">
-          <p className="kicker">Surrey, British Columbia</p>
+          <p className="kicker">Licensed &amp; insured · Surrey, British Columbia</p>
           <h1>Built right.<br /><em>Powered</em> for life.</h1>
           <p className="hero-intro">Residential, commercial and industrial electrical work backed by more than 30 years of hands-on experience.</p>
           <div className="button-row hero-actions"><Link className="button dark" href="/contact">Request a quote</Link><Link className="button outline" href="/projects">View all projects</Link></div>
@@ -31,8 +31,8 @@ export default function Home() {
           <div className="hero-facts"><div><strong>30+</strong><span>Years of experience</span></div><div><strong>24/7</strong><span>Emergency response</span></div><div><strong>Full scope</strong><span>Residential to industrial</span></div></div>
         </div>
         <div className="hero-visual">
-          <Image src="/images/hero.png" alt="Flora and Fauna multi-family development, a Badesha Electrical project" width={768} height={458} priority sizes="(max-width: 980px) 100vw, 47vw" />
-          <div className="hero-badge"><span>Current focus</span><strong>Complete electrical delivery</strong></div>
+          <Image src="/images/residential-modern-farmhouse.jpg" alt="Modern custom home built by Badesha Properties" width={1536} height={1026} priority sizes="(max-width: 980px) 100vw, 52vw" />
+          <div className="hero-badge"><span>Residential to industrial</span><strong>Complete electrical delivery</strong></div>
         </div>
       </section>
 
@@ -42,7 +42,7 @@ export default function Home() {
         <div className="section-heading"><div><p className="kicker">Project sectors</p><h2>Built for every environment.</h2></div><p>Thoughtful electrical delivery for homes, active commercial spaces and guest-focused properties throughout Greater Vancouver.</p></div>
         <div className="sector-grid">
           <article className="sector-card">
-            <Image src="/images/about.jpg" alt="Completed residential project in British Columbia" width={900} height={650} sizes="(max-width: 760px) 100vw, 33vw" />
+            <Image src="/images/residential-fairfield-infill.jpg" alt="Custom residence from the Badesha Properties portfolio" width={1536} height={1026} sizes="(max-width: 760px) 100vw, 33vw" />
             <div><span>01</span><h3>Residential</h3><p>New construction, renovations, service upgrades, lighting and dependable backup power.</p></div>
           </article>
           <article className="sector-card">
@@ -57,6 +57,17 @@ export default function Home() {
         <div className="sector-footer"><Link className="button dark" href="/projects">View all projects</Link><p>Explore completed and upcoming work across the Lower Mainland.</p></div>
       </section>
 
+      <section className="residential-showcase" aria-labelledby="residential-showcase-title">
+        <div className="residential-showcase-copy">
+          <p className="kicker light">Residential electrical</p>
+          <h2 id="residential-showcase-title">Made for the way people live.</h2>
+          <p>From custom-home wiring and renovations to lighting, panels and dependable backup power, the electrical work should feel considered in every room.</p>
+          <Link className="button orange" href="/services/residential-electrician-surrey">Explore residential services</Link>
+        </div>
+        <figure className="residential-image residential-image-wide"><Image src="/images/residential-fairfield.jpg" alt="Contemporary custom home from the Badesha Properties portfolio" width={1536} height={745} sizes="(max-width: 760px) 100vw, 60vw" /><figcaption>Custom homes</figcaption></figure>
+        <figure className="residential-image"><Image src="/images/residential-macdonald-park.jpg" alt="West Coast residence from the Badesha Properties portfolio" width={1536} height={1007} sizes="(max-width: 760px) 100vw, 40vw" /><figcaption>New construction</figcaption></figure>
+      </section>
+
       <section className="section services-home">
         <div className="section-heading"><div><p className="kicker">Capabilities</p><h2>One team.<br />Every connection.</h2></div><p>From a failed breaker at home to the full electrical scope of a multi-family build, our work is planned carefully and delivered professionally.</p></div>
         <div className="service-list">
@@ -65,7 +76,7 @@ export default function Home() {
       </section>
 
       <section className="split-story">
-        <div className="story-image"><Image src="/images/about.jpg" alt="Completed residential electrical project in British Columbia" width={1200} height={800} sizes="(max-width: 980px) 100vw, 50vw" /></div>
+        <div className="story-image"><Image src="/images/residential-fairfield-infill.jpg" alt="Custom residence from the Badesha Properties portfolio" width={1536} height={1026} sizes="(max-width: 980px) 100vw, 50vw" /></div>
         <div className="story-copy"><p className="kicker light">The Badesha standard</p><h2>Experience you can feel in the finished work.</h2><p>For more than three decades, Badesha Electrical has served homeowners, builders and businesses with pride. We pair seasoned field knowledge with clear communication, responsible planning and respect for every jobsite.</p><a className="button orange" href="/about">Meet Badesha Electrical</a></div>
       </section>
 

@@ -102,11 +102,25 @@ test("uses record-specific social images on representative detail routes", async
     readFile(new URL(".next/server/app/projects/centro.html", root), "utf8"),
     readFile(new URL(".next/server/app/service-areas/surrey.html", root), "utf8"),
   ]);
-  assert.match(service, /property="og:image" content="https:\/\/badeshaelectrical\.com\/images\/about\.jpg"/);
+  assert.match(service, /property="og:image" content="https:\/\/badeshaelectrical\.com\/images\/residential-fairfield-infill\.jpg"/);
   assert.match(project, /property="og:image" content="https:\/\/badeshaelectrical\.com\/images\/centro\.jpg"/);
   assert.doesNotMatch(service, /property="og:image" content="[^"]*\/og\.png"/);
   assert.doesNotMatch(project, /property="og:image" content="[^"]*\/og\.png"/);
   assert.doesNotMatch(location, /property="og:image"/);
+});
+
+test("uses client-approved Badesha Properties imagery for residential sections", async () => {
+  const [home, about, content] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/about/page.tsx", root), "utf8"),
+    readFile(new URL("app/content.ts", root), "utf8"),
+  ]);
+  assert.match(home, /residential-modern-farmhouse\.jpg/);
+  assert.match(home, /residential-fairfield\.jpg/);
+  assert.match(home, /residential-macdonald-park\.jpg/);
+  assert.match(home, /Made for the way people live/);
+  assert.match(about, /residential-fairfield\.jpg/);
+  assert.match(content, /residential-fairfield-infill\.jpg/);
 });
 
 test("project detail pages include researched profiles and useful facts", async () => {

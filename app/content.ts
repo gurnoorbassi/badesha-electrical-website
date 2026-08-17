@@ -49,7 +49,7 @@ export const servicePages = [
     eyebrow: "Homes and renovations",
     description: "Residential electrician in Surrey for panel upgrades, renovations, lighting, rewiring, ceiling fans and backup power across Greater Vancouver.",
     intro: "Badesha Electrical provides careful residential electrical work for homeowners, renovators and builders throughout Surrey and the Lower Mainland. From a new circuit to a complete service upgrade, every installation is planned around safety, reliability and the finished space.",
-    image: "/images/about.jpg",
+    image: "/images/residential-fairfield-infill.jpg",
     services: ["Service and panel upgrades", "Renovation wiring and new circuits", "LED and recessed lighting", "Ceiling fans and chandeliers", "Whole-home rewiring", "Surge protection", "Under-cabinet lighting", "Backup generators and transfer switches"],
     reasons: ["More than 30 years of electrical experience", "Licensed and insured electrical contractor", "Clear estimates before custom work proceeds", "Same-day and 24-hour emergency service available"],
     faqs: [
