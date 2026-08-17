@@ -66,7 +66,7 @@ test("prerenders the full SEO route set with unique discovery metadata", async (
   const appOutput = new URL(".next/server/app/", root);
   const files = await readdir(appOutput, { recursive: true });
   const htmlFiles = files.filter((file) => file.endsWith(".html") && !file.startsWith("_")).sort();
-  assert.equal(htmlFiles.length, 29);
+  assert.equal(htmlFiles.length, 32);
 
   const titles = new Set();
   const descriptions = new Set();
@@ -138,9 +138,27 @@ test("organizes services and projects into client-requested navigation tabs", as
   assert.match(services, /id="emergency"/);
   assert.match(projects, /id="upcoming"/);
   assert.match(projects, /id="completed"/);
-  assert.match(projects, /id="hospitality"/);
+  assert.match(projects, /\/projects\/residential-multi-family/);
+  assert.match(projects, /\/projects\/commercial-industrial/);
+  assert.match(projects, /\/projects\/hospitality/);
   assert.match(residential, /residentialGallery/);
   assert.doesNotMatch(residential, /duplex/i);
+});
+
+test("provides standalone project category pages with the approved residential photo library", async () => {
+  const [category, residential, commercial, hospitality] = await Promise.all([
+    readFile(new URL("components/ProjectCategory.tsx", root), "utf8"),
+    readFile(new URL("app/projects/residential-multi-family/page.tsx", root), "utf8"),
+    readFile(new URL("app/projects/commercial-industrial/page.tsx", root), "utf8"),
+    readFile(new URL("app/projects/hospitality/page.tsx", root), "utf8"),
+  ]);
+  assert.match(residential, /path="\/projects\/residential-multi-family"/);
+  assert.match(commercial, /path="\/projects\/commercial-industrial"/);
+  assert.match(hospitality, /path="\/projects\/hospitality"/);
+  for (const image of ["modern-farmhouse", "fairfield", "fairfield-infill", "macdonald-park", "alberg-lane", "fairfield-east", "linwood", "mcdonald-residences", "mt-douglas", "south-oak-bay"]) {
+    assert.match(category, new RegExp(`residential-${image}\\.jpg`));
+  }
+  assert.doesNotMatch(category, /duplex/i);
 });
 
 test("project detail pages include researched profiles and useful facts", async () => {

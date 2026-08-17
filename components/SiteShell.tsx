@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const nav = [
   { label: "Services", href: "/services", children: [["Residential", "/services#residential"], ["Commercial", "/services#commercial"], ["Industrial", "/services#commercial"], ["24-hour emergency", "/services#emergency"]] },
-  { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects#residential"], ["Commercial & industrial", "/projects#commercial"], ["Hospitality", "/projects#hospitality"]] },
+  { label: "Projects", href: "/projects", children: [["Upcoming projects", "/projects#upcoming"], ["Completed projects", "/projects#completed"], ["Residential & multi-family", "/projects/residential-multi-family"], ["Commercial & industrial", "/projects/commercial-industrial"], ["Hospitality", "/projects/hospitality"]] },
   { label: "About", href: "/about" },
   { label: "Safety", href: "/safety" },
   { label: "Contact", href: "/contact" },
@@ -47,7 +47,7 @@ export function Footer() {
       </div>
       <div className="footer-grid">
         <div>
-          <Image className="footer-logo" src="/images/logo.png" alt="Badesha Electrical Ltd." width={2172} height={724} />
+          <Link className="footer-brand" href="/" aria-label="Badesha Electrical Ltd. home"><Image src="/images/logo-mark.png" alt="" width={512} height={512} /><span><strong>Badesha</strong><small>Electrical Ltd.</small></span></Link>
           <p>Residential, commercial and industrial electrical expertise across Greater Vancouver.</p>
         </div>
         <div><strong>Visit</strong><Link href="/services">Services</Link><Link href="/projects">Projects</Link><Link href="/service-areas">Service areas</Link><Link href="/about">About</Link><Link href="/safety">Safety</Link></div>

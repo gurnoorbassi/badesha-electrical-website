@@ -8,7 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/contact", "monthly", .9], ["/book", "monthly", .8],
   ] as const;
   const serviceRoutes = servicePages.map((service) => [`/services/${service.slug}`, "monthly", .85] as const);
+  const projectCategoryRoutes = [["/projects/residential-multi-family", "monthly", .8], ["/projects/commercial-industrial", "monthly", .8], ["/projects/hospitality", "monthly", .8]] as const;
   const projectRoutes = projects.map((project) => [`/projects/${project.slug}`, project.status === "Upcoming" ? "monthly" : "yearly", .7] as const);
   const locationRoutes = locationPages.map((location) => [`/service-areas/${location.slug}`, "monthly", .75] as const);
-  return [...core, ...serviceRoutes, ...projectRoutes, ...locationRoutes].map(([path, changeFrequency, priority]) => ({ url: `${siteUrl}${path}`, changeFrequency, priority }));
+  return [...core, ...serviceRoutes, ...projectCategoryRoutes, ...projectRoutes, ...locationRoutes].map(([path, changeFrequency, priority]) => ({ url: `${siteUrl}${path}`, changeFrequency, priority }));
 }
