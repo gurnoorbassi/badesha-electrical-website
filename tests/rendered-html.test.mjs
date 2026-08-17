@@ -109,6 +109,23 @@ test("uses record-specific social images on representative detail routes", async
   assert.doesNotMatch(location, /property="og:image"/);
 });
 
+test("project detail pages include researched profiles and useful facts", async () => {
+  const [content, page] = await Promise.all([
+    readFile(new URL("app/content.ts", root), "utf8"),
+    readFile(new URL("app/projects/[slug]/page.tsx", root), "utf8"),
+  ]);
+  for (const project of ["chronicle", "centro", "nova", "rockridge-living", "park-maven", "flora-fauna", "element-1", "partap-complex", "unison", "verge"]) {
+    assert.match(content, new RegExp(`slug: "${project}"`));
+  }
+  assert.match(content, /372 total/);
+  assert.match(content, /650 planned/);
+  assert.match(content, /Public rental listings advertise homes as available/);
+  assert.match(page, /Project profile/);
+  assert.match(page, /Latest public update/);
+  assert.match(page, /project\.facts\.map/);
+  assert.match(page, /project\.highlights\.map/);
+});
+
 test("preserves legacy search equity and hardened delivery headers", async () => {
   const config = await readFile(new URL("netlify.toml", root), "utf8");
   for (const legacyPath of ["/contact-us", "/book-a-service", "/about-us", "/reviews", "/flora-fauna-20267-72-avenue-langley", "/verge-langley-city"]) {
