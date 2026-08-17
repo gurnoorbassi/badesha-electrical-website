@@ -225,6 +225,21 @@ test("organizes services and projects into client-requested navigation tabs", as
   assert.doesNotMatch(residential, /duplex/i);
 });
 
+test("ships a site-wide motion system with accessible reduced-motion behavior", async () => {
+  const [layout, motion, css] = await Promise.all([
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("components/MotionEnhancements.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
+  ]);
+  assert.match(layout, /<MotionEnhancements \/>/);
+  assert.match(motion, /IntersectionObserver/);
+  assert.match(motion, /prefers-reduced-motion: reduce/);
+  assert.match(motion, /motion-scroll-progress/);
+  assert.match(css, /\.motion-reveal\.motion-visible/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /@view-transition/);
+});
+
 test("provides standalone project category pages with the approved residential photo library", async () => {
   const [category, residential, commercial, hospitality] = await Promise.all([
     readFile(new URL("components/ProjectCategory.tsx", root), "utf8"),

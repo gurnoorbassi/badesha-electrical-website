@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Geist_Mono, Manrope } from "next/font/google";
 import { Footer, Header } from "../components/SiteShell";
+import { MotionEnhancements } from "../components/MotionEnhancements";
 import { serviceAreas, siteUrl } from "./content";
 import "./globals.css";
 
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en-CA" data-scroll-behavior="smooth">
       <body className={`${manrope.variable} ${barlowCondensed.variable} ${geistMono.variable}`}>
+        <MotionEnhancements />
         <a className="skip-link" href="#main-content">Skip to content</a>
         <Header />
         <div id="main-content">{children}</div>

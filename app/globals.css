@@ -582,6 +582,70 @@ button, input, textarea, select { font: inherit; }
   .location-hero h1 { font-size: clamp(3.6rem,15vw,5rem); }
 }
 
+/* Shared motion system */
+.motion-scroll-progress { --scroll-progress: 0; position: fixed; z-index: 100; top: 0; right: 0; left: 0; height: 3px; pointer-events: none; background: linear-gradient(90deg,var(--orange),var(--amber)); transform: scaleX(var(--scroll-progress)); transform-origin: left center; will-change: transform; }
+.site-header { transition: min-height .28s ease, background-color .28s ease, box-shadow .28s ease; }
+.site-header.is-scrolled { background: rgba(255,255,255,.98); box-shadow: 0 14px 40px rgba(16,24,32,.1); }
+
+.motion-enabled .home-hero .hero-copy > * { opacity: 0; animation: motion-hero-copy .78s cubic-bezier(.2,.75,.2,1) forwards; }
+.motion-enabled .home-hero .hero-copy > *:nth-child(1) { animation-delay: .08s; }
+.motion-enabled .home-hero .hero-copy > *:nth-child(2) { animation-delay: .16s; }
+.motion-enabled .home-hero .hero-copy > *:nth-child(3) { animation-delay: .25s; }
+.motion-enabled .home-hero .hero-copy > *:nth-child(4) { animation-delay: .34s; }
+.motion-enabled .home-hero .hero-copy > *:nth-child(5) { animation-delay: .43s; }
+.motion-enabled .home-hero .hero-visual { animation: motion-hero-image 1.05s cubic-bezier(.2,.75,.2,1) both; }
+.motion-enabled .page-intro { background-image: radial-gradient(circle at 82% 12%,rgba(233,88,33,.12),transparent 28rem); background-size: 130% 130%; animation: motion-ambient 12s ease-in-out infinite alternate; }
+
+.motion-enabled .motion-reveal { opacity: 0; filter: blur(5px); transform: translate3d(0,32px,0); transition: opacity .7s ease var(--motion-delay,0ms), transform .85s cubic-bezier(.2,.75,.2,1) var(--motion-delay,0ms), filter .7s ease var(--motion-delay,0ms); will-change: opacity,transform,filter; }
+.motion-enabled .motion-reveal[data-motion-direction="left"] { transform: translate3d(-28px,18px,0); }
+.motion-enabled .motion-reveal[data-motion-direction="right"] { transform: translate3d(28px,18px,0); }
+.motion-enabled .motion-reveal.motion-visible { opacity: 1; filter: blur(0); transform: translate3d(0,0,0); }
+.motion-enabled .motion-reveal > img, .motion-enabled .motion-reveal picture img { transform: scale(1.045); transition: transform 1.15s cubic-bezier(.2,.75,.2,1) var(--motion-delay,0ms); }
+.motion-enabled .motion-reveal.motion-visible > img, .motion-enabled .motion-reveal.motion-visible picture img { transform: scale(1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card, .sector-card, .service-page-grid > a, .category-project-grid > a, .related-grid > a, .area-card { transition: transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease, border-color .25s ease; }
+  .project-card:hover, .sector-card:hover, .service-page-grid > a:hover, .category-project-grid > a:hover, .related-grid > a:hover, .area-card:hover { transform: translateY(-7px); box-shadow: 0 24px 55px rgba(16,24,32,.16); }
+  .project-card img, .sector-card img, .service-page-grid > a img, .category-project-grid > a img { transition: transform .7s cubic-bezier(.2,.75,.2,1), filter .5s ease; }
+  .project-card:hover img, .sector-card:hover img, .service-page-grid > a:hover img, .category-project-grid > a:hover img { transform: scale(1.055); filter: saturate(1.08) contrast(1.03); }
+  .button, .text-link, .desktop-nav a { transition-duration: .28s; }
+}
+
+.motion-enabled .mobile-menu[open] nav { animation: motion-menu-panel .34s cubic-bezier(.2,.75,.2,1) both; }
+.motion-enabled .mobile-menu[open] .mobile-primary-link,
+.motion-enabled .mobile-menu[open] .mobile-submenu,
+.motion-enabled .mobile-menu[open] .mobile-menu-actions { opacity: 0; animation: motion-menu-item .38s ease forwards; }
+.motion-enabled .mobile-menu[open] .mobile-submenu:nth-of-type(1) { animation-delay: .05s; }
+.motion-enabled .mobile-menu[open] .mobile-submenu:nth-of-type(2) { animation-delay: .09s; }
+.motion-enabled .mobile-menu[open] .mobile-primary-link:nth-of-type(1) { animation-delay: .13s; }
+.motion-enabled .mobile-menu[open] .mobile-primary-link:nth-of-type(2) { animation-delay: .17s; }
+.motion-enabled .mobile-menu[open] .mobile-primary-link:nth-of-type(3) { animation-delay: .21s; }
+.motion-enabled .mobile-menu[open] .mobile-menu-actions { animation-delay: .25s; }
+
+@supports (animation-timeline: view()) {
+  .motion-enabled .hero-visual img, .motion-enabled .detail-hero img, .motion-enabled .project-detail-media img { animation: motion-image-drift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+}
+
+@keyframes motion-hero-copy { from { opacity: 0; transform: translate3d(0,28px,0); } to { opacity: 1; transform: translate3d(0,0,0); } }
+@keyframes motion-hero-image { from { opacity: 0; clip-path: inset(0 0 0 18%); transform: scale(1.06); } to { opacity: 1; clip-path: inset(0); transform: scale(1); } }
+@keyframes motion-ambient { from { background-position: 100% 0; } to { background-position: 70% 25%; } }
+@keyframes motion-menu-panel { from { opacity: 0; transform: translate3d(0,-14px,0); } to { opacity: 1; transform: translate3d(0,0,0); } }
+@keyframes motion-menu-item { from { opacity: 0; transform: translate3d(0,10px,0); } to { opacity: 1; transform: translate3d(0,0,0); } }
+@keyframes motion-image-drift { from { transform: scale(1.07) translateY(-1.5%); } to { transform: scale(1.07) translateY(1.5%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .motion-scroll-progress { display: none; }
+  .motion-reveal { opacity: 1 !important; filter: none !important; transform: none !important; }
+}
+
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: motion-page-out .18s ease both; }
+::view-transition-new(root) { animation: motion-page-in .32s ease both; }
+@keyframes motion-page-out { to { opacity: 0; transform: translateY(-5px); } }
+@keyframes motion-page-in { from { opacity: 0; transform: translateY(8px); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
